@@ -1,13 +1,7 @@
 #!/usr/bin/env python
-#keyboard_cmd_vel.py
-#Copyright (c) 2016 RT Corp. <shop@rt-net.jp>
-#Copyright (c) 2016 Daisuke Sato <tiryoh@gmail.com>
-#Copyright (c) 2016 Ryuichi Ueda <ryuichiueda@gmail.com>
-
-#This software is released under the MIT License.
-#http://opensource.org/licenses/mit-license.php
 
 import rospy
+import numpy as np
 from geometry_msgs.msg import Twist
 from std_srvs.srv import Trigger, TriggerResponse
 
@@ -18,12 +12,14 @@ rospy.ServiceProxy('/motor_on',Trigger).call()
 
 rospy.init_node('keyboard_cmd_vel')
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+vel = Twist()
+vel.linear.x = 0.0
+
 while not rospy.is_shutdown():
     vel = Twist()
-    direction = raw_input('k: forward, j: backward, h: left, l: right, return: stop > ')
-    if 'k' in direction: vel.linear.x = 0.15
-    if 'j' in direction: vel.linear.x = -0.15
-    if 'h' in direction: vel.angular.z = 3.14/4
-    if 'l' in direction: vel.angular.z = -3.14/4
-    print vel
+    direction = raw_input('w: forward, s: backward, a: left, d: right, return: stop > ')
+    if 'w' in direction: vel.linear.x = 0.20
+    if 's' in direction: vel.linear.x = -0.20
+    if 'a' in direction: vel.angular.z = np.pi* 0.7#3.14/4 * 4.0
+    if 'd' in direction: vel.angular.z = -np.pi * 0.7#-3.14/4 * 4.0
     pub.publish(vel)
