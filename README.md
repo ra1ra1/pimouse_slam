@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # pimouse_slam
 gmapping wrapper for Raspberry Pi Mouse (an example on the book)
 
@@ -14,3 +15,6 @@ and a work of shotahirama (https://github.com/shotahirama) respectively.
 Rt-net/raspimouse\_sim is a work by RT-corporation and
 Tiryoh (https://github.com/Tiryoh/).
 
+=======
+# pimouse_slam
+>>>>>>> a0aa6f1c4ea3d27a763bfaa9b1bb134cd8b56510
